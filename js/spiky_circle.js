@@ -9,9 +9,13 @@ function draw() {
     let yOrigin = 750;
     let pointsToDraw = createArrayOfLineSegments(xOrigin, yOrigin, 200, 10, 50);
     // console.log(pointsToDraw);
+    clear();
     stroke(9, 46, 20);
     
     drawLineSegments(pointsToDraw, count, xOrigin, yOrigin);
+    for (var i = 0; i < 10000; i++) {
+        console.log(i);
+    }
     count += 1;
 }
 
@@ -53,7 +57,7 @@ function createArrayOfLineSegments(xOrigin, yOrigin, numLines, maxLengthOfSegmen
 }
 
 function drawLineSegments(array, count, xOrigin, yOrigin) {
-    if(count < 1) {
+    if(count < 1000) {
         numLines = array.length;
         console.log(numLines);    
         numSegments = array[0].length;
