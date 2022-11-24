@@ -1,21 +1,31 @@
+let xOrigin = 750;
+let yOrigin = 750;
+let count = 0;
+let colours = [];
+let pointsToDraw = [];
+
 function setup() {
     createCanvas(1500,1500);
+    let numColours = 50;
+    colours = generateColours(numColours);
+
+
+    let numLines = 100;
+    let maxLengthOfSegment = 10;
+    let numSegments = 50;
+    pointsToDraw = createArrayOfLineSegments(xOrigin, yOrigin, numLines, maxLengthOfSegment, numSegments);
+
 }
 
-let count = 0;
-
 function draw() {
-    let xOrigin = 750;
-    let yOrigin = 750;
-    let pointsToDraw = createArrayOfLineSegments(xOrigin, yOrigin, 200, 10, 50);
-    // console.log(pointsToDraw);
-    clear();
-    stroke(9, 46, 20);
     
-    drawLineSegments(pointsToDraw, count, xOrigin, yOrigin);
-    for (var i = 0; i < 10000; i++) {
+    clear();
+    drawLineSegments(pointsToDraw, count, xOrigin, yOrigin, colours);
+    for ( let i = 0; i < 5000; i++) {
         console.log(i);
     }
+    fill('black');
+    circle(xOrigin, yOrigin, 50);
     count += 1;
 }
 
@@ -56,13 +66,13 @@ function createArrayOfLineSegments(xOrigin, yOrigin, numLines, maxLengthOfSegmen
     return arrayOfSegmentedLines;
 }
 
-function drawLineSegments(array, count, xOrigin, yOrigin) {
+function drawLineSegments(array, count, xOrigin, yOrigin, colours) {
     if(count < 1000) {
         numLines = array.length;
-        console.log(numLines);    
         numSegments = array[0].length;
-        console.log(numSegments);
         for (var i = 0; i < numSegments; i++) {
+            colour = (i + count) % colours.length;
+            stroke(colours[colour][0], colours[colour][1], colours[colour][2]);
             for (var j = 0; j < numLines-1; j++) {
                 // This connects the current end of segment to the end of the segment on another line adjacent to it
                 if (i == numSegments-1) {
@@ -71,8 +81,21 @@ function drawLineSegments(array, count, xOrigin, yOrigin) {
                 line(array[j][i].x, array[j][i].y, array[j+1][i].x, array[j+1][i].y);
             }
             line(array[numLines-1][i].x, array[numLines-1][i].y, array[0][i].x, array[0][i].y)
-
         }
     }
     
+}
+
+function generateColours(numColours) {
+    let i = 0;
+    let colours = [];
+    while(i < numColours) {
+        let colour = [];
+        colour.push(Math.floor(Math.random()* 255));
+        colour.push(Math.floor(Math.random()* 50 + 50));
+        colour.push(Math.floor(Math.random()* 255));
+        colours.push(colour);
+        i++;
+    }
+    return colours;
 }
