@@ -23,7 +23,6 @@ function generateColours(numColours) {
         i++;
     }
     return colours;
-    // console.log(colours);
 }
 
 class Point {

@@ -68,12 +68,10 @@ function createHorizontalRectangles(xStart, yStart, maxHeight, width, spacing, r
         topLeft = Math.random() * 100;
         secTopLeft = Math.random() * 100;
         // Fill colour for first rec
-        // (i % 2 == 0) ? fill(148, 147, 152) : fill(244, 223, 78);
         (i % 2 == 0) ? fill(colours[0], colours[1], colours[2]) : fill(colours[3], colours[4], colours[5]);
 
         rect(x, y, firstWidth, height, /* radius*/ topLeft, radius, radius, radius);
         // Fill colour for second rec
-        // (i % 2 == 0) ? fill(244, 223, 78) : fill(148, 147, 152);
         (i % 2 == 0) ? fill(colours[3], colours[4], colours[5]) : fill(colours[0], colours[1], colours[2]);
         rect(x + firstWidth + spacing, y, width - firstWidth - spacing, height, /* radius */ secTopLeft, radius, radius, radius);
         y += height + spacing;
